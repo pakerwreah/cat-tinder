@@ -7,6 +7,7 @@ import {
   NunitoSans_700Bold,
   useFonts,
 } from '@expo-google-fonts/nunito-sans';
+import { useUserStore } from '@/lib/user/store';
 
 void SplashScreen.preventAutoHideAsync();
 
@@ -19,11 +20,15 @@ if (Constants.executionEnvironment === ExecutionEnvironment.Standalone) {
 }
 
 export function SplashManager({ children }: { children: ReactNode }) {
-  const [loaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     NunitoSans_400Regular,
     NunitoSans_500Medium,
     NunitoSans_700Bold,
   });
+
+  const userHydrated = useUserStore((store) => store._hydrated);
+
+  const loaded = fontsLoaded && userHydrated;
 
   useEffect(() => {
     if (loaded) {
