@@ -1,5 +1,9 @@
-import { View } from 'react-native';
+import { Text } from 'react-native';
 
 export default function ProfileScreen() {
-  return <View>{/* TODO */}</View>;
+  return (
+    <Text className="mx-auto mt-28 font-bold text-9xl leading-normal text-[#BFBFC0]">
+      03
+    </Text>
+  );
 }
