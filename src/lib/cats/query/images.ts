@@ -1,0 +1,25 @@
+import { queryOptions, useQuery } from '@tanstack/react-query';
+import { catsClient } from '@/lib/cats/client';
+
+export function getCatImagesQueryKey() {
+  return ['cat-images'] as const;
+}
+
+export function getCatImagesQuery() {
+  return queryOptions({
+    queryKey: getCatImagesQueryKey(),
+    queryFn: async () => {
+      console.log('Fetching cat images...');
+      const [error, data] = await catsClient.getImages();
+      if (error) {
+        console.error('getCatImages', error);
+        throw error;
+      }
+      return data ?? [];
+    },
+  });
+}
+
+export function useCatImagesQuery() {
+  return useQuery(getCatImagesQuery());
+}

@@ -13,7 +13,7 @@ export default {
         bold: ['NunitoSans_700Bold'],
       },
       boxShadow: {
-        'drop': '0px 10px 16px 0px #BFBFC04D',
+        'drop': '0px 10px 16px 0px #BFBFC08D',
       }
     }
   }

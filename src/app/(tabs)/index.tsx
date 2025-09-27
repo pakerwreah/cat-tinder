@@ -1,15 +1,25 @@
-import { View, Text, Pressable, PressableProps } from 'react-native';
+import { View, Pressable, type PressableProps, ActivityIndicator, Button } from 'react-native';
 import XIcon from '@/assets/icons/x.svg';
 import HeartIcon from '@/assets/icons/heart.svg';
-import { useUserStore } from '@/lib/user/store';
+import { useCatImagesQuery } from '@/lib/cats/query/images';
+import { useCallback } from 'react';
+import { CatImageDeck } from '@/components/CatImageDeck';
 
 export default function Index() {
-  const userId = useUserStore((store) => store.userId);
+  const query = useCatImagesQuery(); // TODO: make paginated and load more when deck is empty
+
+  const retryTap = useCallback(() => query.refetch(), [query]);
 
   return (
     <View className="flex flex-1 items-center justify-center gap-16">
-      <View className="aspect-[0.8] w-full justify-center bg-gray-200">
-        <Text className="text-center font-bold text-3xl">User id {userId}</Text>
+      <View className="aspect-[0.8] w-full items-center justify-center">
+        {query.isLoading ? (
+          <ActivityIndicator color="black" />
+        ) : query.isError ? (
+          <Button title="Retry" onPress={retryTap} />
+        ) : (
+          <CatImageDeck images={query.data ?? []} />
+        )}
       </View>
       <View className="flex-row gap-12">
         <ActionButton>
@@ -26,7 +36,7 @@ export default function Index() {
 function ActionButton(props: PressableProps) {
   return (
     <Pressable
-      className="size-14 rounded-full bg-white p-3 shadow-drop active:bg-gray-200"
+      className="size-14 rounded-full bg-white p-2.5 shadow-drop active:bg-gray-200"
       {...props}
     />
   );
