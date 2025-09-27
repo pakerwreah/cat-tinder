@@ -1,12 +1,6 @@
-import {
-  Tabs,
-  TabList,
-  TabTrigger,
-  TabSlot,
-  TabTriggerSlotProps,
-} from 'expo-router/ui';
+import { Tabs, TabList, TabTrigger, TabSlot, type TabTriggerSlotProps } from 'expo-router/ui';
 import { Pressable } from 'react-native';
-import { SvgProps } from 'react-native-svg';
+import { type SvgProps } from 'react-native-svg';
 import React from 'react';
 import PawIcon from '@/assets/icons/paw.svg';
 import ChatIcon from '@/assets/icons/message.svg';

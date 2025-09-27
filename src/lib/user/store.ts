@@ -2,7 +2,7 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import { create } from 'zustand';
 import { randomUUID } from 'expo-crypto';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { StoreApi } from 'zustand/vanilla';
+import { type StoreApi } from 'zustand/vanilla';
 
 type UserState = {
   userId: string;
