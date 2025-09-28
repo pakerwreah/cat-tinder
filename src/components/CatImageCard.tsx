@@ -68,17 +68,17 @@ export function CatImageCard({ image, onSwipe, ...props }: Props) {
   return (
     <GestureDetector gesture={gesture}>
       <Animated.View {...props} style={animatedCardStyle}>
-        <Image className="size-full overflow-hidden rounded-2xl bg-gray-400" source={image.url} />
+        <Image className="size-full overflow-hidden rounded-2xl bg-gray-200" source={image.url} />
 
         <Animated.View
-          className="absolute left-8 top-16 rotate-[-20deg] rounded-lg border-4 border-green-500 px-4"
+          className="absolute left-8 top-16 -rotate-12 rounded-lg border-4 border-green-500 px-4"
           style={animatedLikeStyle}
         >
           <Text className="text-center font-bold text-4xl leading-snug text-green-500">LIKE</Text>
         </Animated.View>
 
         <Animated.View
-          className="absolute right-8 top-16 rotate-[20deg] rounded-lg border-4 border-red-500 px-3"
+          className="absolute right-8 top-16 rotate-12 rounded-lg border-4 border-red-500 px-3"
           style={animatedNopeStyle}
         >
           <Text className="text-center font-bold text-4xl leading-snug text-red-500">NOPE</Text>

@@ -6,19 +6,19 @@ import { useCallback } from 'react';
 import { CatImageDeck } from '@/components/CatImageDeck';
 
 export default function Index() {
-  const query = useCatImagesQuery(); // TODO: make paginated and load more when deck is empty
+  const query = useCatImagesQuery();
 
-  const retryTap = useCallback(() => query.refetch(), [query]);
+  const refetch = useCallback(() => query.refetch(), [query]);
 
   return (
     <View className="flex flex-1 items-center justify-center gap-16">
       <View className="aspect-[0.8] w-full items-center justify-center">
-        {query.isLoading ? (
+        {query.isFetching ? (
           <ActivityIndicator color="black" />
         ) : query.isError ? (
-          <Button title="Retry" onPress={retryTap} />
+          <Button title="Retry" onPress={refetch} />
         ) : (
-          <CatImageDeck images={query.data ?? []} />
+          <CatImageDeck images={query.data ?? []} fetchMore={refetch} />
         )}
       </View>
       <View className="flex-row gap-12">
