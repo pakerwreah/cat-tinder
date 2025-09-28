@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { Text, View, type ViewProps } from 'react-native';
 import { type CatImage } from '@/lib/cats/types';
-import { useCallback } from 'react';
+import { type Ref, useCallback, useImperativeHandle } from 'react';
 import { Dimensions } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
@@ -15,13 +15,30 @@ import Animated, {
 const { width } = Dimensions.get('window');
 const SWIPE_THRESHOLD = width / 2;
 
+export type CatImageCardRef = {
+  swipe(action: 'left' | 'right'): void;
+};
+
 type Props = ViewProps & {
+  ref?: Ref<CatImageCardRef>;
   image: CatImage;
   onSwipe(id: string, action: 'left' | 'right'): void;
 };
 
-export function CatImageCard({ image, onSwipe, ...props }: Props) {
+export function CatImageCard({ ref, image, onSwipe, ...props }: Props) {
   const translateX = useSharedValue(0);
+
+  useImperativeHandle(ref, () => ({
+    swipe(action) {
+      translateX.value = withTiming(
+        (action === 'right' ? width : -width) * 1.5,
+        { duration: 300 },
+        () => {
+          runOnJS(onSwipe)(image.id, action);
+        },
+      );
+    },
+  }));
 
   const gesture = Gesture.Pan()
     .onUpdate((e) => {

@@ -9,7 +9,6 @@ export function getCatImagesQuery() {
   return queryOptions({
     queryKey: getCatImagesQueryKey(),
     queryFn: async () => {
-      console.log('Fetching cat images...');
       const [error, data] = await catsClient.getImages();
       if (error) {
         console.error('getCatImages', error);
