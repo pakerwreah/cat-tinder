@@ -1,16 +1,19 @@
-import { Image } from 'expo-image';
-import { Text, View, type ViewProps } from 'react-native';
-import { type CatImage } from '@/lib/cats/types';
 import { type Ref, useCallback, useImperativeHandle } from 'react';
+import { Text, View, type ViewProps } from 'react-native';
 import { Dimensions } from 'react-native';
+
+import { Image } from 'expo-image';
+
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
-  useSharedValue,
+  runOnJS,
   useAnimatedStyle,
+  useSharedValue,
   withSpring,
   withTiming,
-  runOnJS,
 } from 'react-native-reanimated';
+
+import { type CatImage } from '@/lib/cats/types';
 
 const { width } = Dimensions.get('window');
 const SWIPE_THRESHOLD = width / 2;

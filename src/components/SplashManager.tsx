@@ -1,12 +1,15 @@
+import { type ReactNode, useEffect } from 'react';
+
 import Constants, { ExecutionEnvironment } from 'expo-constants';
 import * as SplashScreen from 'expo-splash-screen';
-import { type ReactNode, useEffect } from 'react';
+
 import {
   NunitoSans_400Regular,
   NunitoSans_500Medium,
   NunitoSans_700Bold,
   useFonts,
 } from '@expo-google-fonts/nunito-sans';
+
 import { useUserStore } from '@/lib/user/store';
 
 void SplashScreen.preventAutoHideAsync();

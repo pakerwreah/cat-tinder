@@ -1,12 +1,15 @@
-import { Tabs, TabList, TabTrigger, TabSlot, type TabTriggerSlotProps } from 'expo-router/ui';
-import { Pressable } from 'react-native';
-import { type SvgProps } from 'react-native-svg';
 import React, { useEffect } from 'react';
+import { Pressable } from 'react-native';
+
+import { TabList, TabSlot, TabTrigger, type TabTriggerSlotProps, Tabs } from 'expo-router/ui';
+
+import { type SvgProps } from 'react-native-svg';
+import { twMerge } from 'tailwind-merge';
+
 import FlameIcon from '@/assets/icons/flame.svg';
 import StarIcon from '@/assets/icons/star.svg';
-import { twMerge } from 'tailwind-merge';
-import { queryClient } from '@/lib/query/client';
 import { getFavouritesQuery } from '@/lib/cats/query/favourites';
+import { queryClient } from '@/lib/query/client';
 
 export default function TabLayout() {
   useEffect(() => {

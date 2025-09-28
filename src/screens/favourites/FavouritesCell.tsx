@@ -1,15 +1,17 @@
-import type { Favourite } from '@/lib/cats/types';
 import { useCallback } from 'react';
 import { Pressable, View } from 'react-native';
+
 import { Image } from 'expo-image';
+
 import XIcon from '@/assets/icons/x.svg';
+import type { Favourite } from '@/lib/cats/types';
 
 type Props = {
   item: Favourite;
   onRemove(id: string): void;
 };
 
-export function FavouriteCell({ item, onRemove }: Props) {
+export function FavouritesCell({ item, onRemove }: Props) {
   const removeTap = useCallback(() => onRemove(item.id), [item.id, onRemove]);
 
   return (

@@ -1,8 +1,10 @@
-import { View, type ViewProps } from 'react-native';
-import { twMerge } from 'tailwind-merge';
-import { type CatImage } from '@/lib/cats/types';
-import { CatImageCard, type CatImageCardRef } from '@/components/CatImageCard';
 import { type Ref, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import { View, type ViewProps } from 'react-native';
+
+import { twMerge } from 'tailwind-merge';
+
+import { CatImageCard, type CatImageCardRef } from '@/components/CatImageCard';
+import { type CatImage } from '@/lib/cats/types';
 
 export type CatImageDeckRef = {
   swipeTop: CatImageCardRef['swipe'];

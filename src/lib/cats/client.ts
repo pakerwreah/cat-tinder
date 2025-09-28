@@ -1,6 +1,6 @@
-import { BasicHttpClient, type HttpClient, type Result } from '@/lib/http/client';
-import { type CatImage, type Favourite } from '@/lib/cats/types';
 import { CAT_API_KEY, CAT_API_URL } from '@/env';
+import { type CatImage, type Favourite } from '@/lib/cats/types';
+import { BasicHttpClient, type HttpClient, type Result } from '@/lib/http/client';
 import { useUserStore } from '@/lib/user/store';
 
 export class CatsClient {

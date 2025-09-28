@@ -1,6 +1,8 @@
 import '@/theme/css-interop';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 import { Stack } from 'expo-router';
+
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export function Application() {
   return (

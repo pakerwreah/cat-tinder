@@ -1,7 +1,8 @@
-import { SplashManager } from '@/components/SplashManager';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from '@/lib/query/client';
+
 import { Application } from '@/components/Application';
+import { SplashManager } from '@/components/SplashManager';
+import { queryClient } from '@/lib/query/client';
 
 export default function RootLayout() {
   return (
