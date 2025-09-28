@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { Text, type ViewProps } from 'react-native';
+import { Text, View, type ViewProps } from 'react-native';
 import { type CatImage } from '@/lib/cats/types';
 import { useCallback } from 'react';
 import { Dimensions } from 'react-native';
@@ -63,10 +63,12 @@ export function CatImageCard({ image, onSwipe, ...props }: Props) {
     opacity: getStampOpacity(translateX.value, 'right'),
   }));
 
+  const breed = image.breeds.at(0);
+
   return (
     <GestureDetector gesture={gesture}>
       <Animated.View {...props} style={animatedCardStyle}>
-        <Image className="size-full overflow-hidden rounded-3xl bg-gray-400" source={image.url} />
+        <Image className="size-full overflow-hidden rounded-2xl bg-gray-400" source={image.url} />
 
         <Animated.View
           className="absolute left-8 top-16 rotate-[-20deg] rounded-lg border-4 border-green-500 px-4"
@@ -81,6 +83,18 @@ export function CatImageCard({ image, onSwipe, ...props }: Props) {
         >
           <Text className="text-center font-bold text-4xl leading-snug text-red-500">NOPE</Text>
         </Animated.View>
+
+        {breed && (
+          <View className="absolute inset-x-4 bottom-0 flex-row justify-between rounded-t-2xl bg-white px-4 py-2">
+            <View>
+              <Text className="font-bold text-base">{breed.name}</Text>
+              <Text className="font-bold text-xs text-gray-dark">{breed.origin}</Text>
+            </View>
+            <View>
+              <Text className="font-bold text-base">{breed.affection_level}</Text>
+            </View>
+          </View>
+        )}
       </Animated.View>
     </GestureDetector>
   );

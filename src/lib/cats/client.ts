@@ -13,7 +13,7 @@ export class CatsClient {
   }
 
   async getImages(): Promise<Result<CatImage[]>> {
-    return this.httpClient.fetch('GET', '/v1/images/search', { limit: 10 });
+    return this.httpClient.fetch('GET', '/v1/images/search', { has_breeds: 1, limit: 10 });
   }
 
   async addFavourite(imageId: string): Promise<Result<{ id: string }>> {
