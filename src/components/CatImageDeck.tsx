@@ -12,9 +12,10 @@ type Props = ViewProps & {
   ref?: Ref<CatImageDeckRef>;
   images: CatImage[];
   fetchMore(): void;
+  onSwipe(id: string, action: 'left' | 'right'): void;
 };
 
-export function CatImageDeck({ ref, className, images, fetchMore, ...props }: Props) {
+export function CatImageDeck({ ref, className, images, fetchMore, onSwipe, ...props }: Props) {
   const topCardRef = useRef<CatImageCardRef>(null);
 
   useImperativeHandle(ref, () => ({
@@ -26,9 +27,13 @@ export function CatImageDeck({ ref, className, images, fetchMore, ...props }: Pr
   const [swiped, setSwiped] = useState<string[]>([]);
   const filtered = images.filter(({ id }) => !swiped.includes(id)).reverse();
 
-  const onSwipe = useCallback((id: string) => {
-    setSwiped((swiped) => swiped.concat(id));
-  }, []);
+  const onCardSwipe = useCallback(
+    (id: string, action: 'left' | 'right') => {
+      setSwiped((swiped) => swiped.concat(id));
+      onSwipe(id, action);
+    },
+    [onSwipe],
+  );
 
   useEffect(() => {
     if (filtered.length === 0) {
@@ -44,7 +49,7 @@ export function CatImageDeck({ ref, className, images, fetchMore, ...props }: Pr
           className={twMerge('absolute inset-4', i < length - 2 && 'invisible')}
           key={image.id}
           image={image}
-          onSwipe={onSwipe}
+          onSwipe={onCardSwipe}
         />
       ))}
     </View>

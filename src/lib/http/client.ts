@@ -8,7 +8,7 @@ export interface HttpClient {
   fetch<T>(
     method: HttpMethod,
     path: string,
-    params: Record<string, any>,
+    params?: Record<string, any>,
     init?: RequestInit,
   ): Promise<Result<T>>;
 }
@@ -27,7 +27,7 @@ export class BasicHttpClient implements HttpClient {
   async fetch<T>(
     method: HttpMethod,
     path: string,
-    params: Record<string, any>,
+    params: Record<string, any> = {},
     init?: RequestInit,
   ): Promise<Result<T>> {
     try {
@@ -37,7 +37,7 @@ export class BasicHttpClient implements HttpClient {
         const query = new URLSearchParams();
         for (const [key, value] of Object.entries(params)) {
           if (value !== null && value !== undefined) {
-            query.append(key, JSON.stringify(value));
+            query.append(key, value);
           }
         }
         const queryString = query.toString();
@@ -48,6 +48,7 @@ export class BasicHttpClient implements HttpClient {
 
       const response = await this.fetchClient.fetch(url, {
         ...init,
+        method,
         body: method !== 'GET' ? JSON.stringify(params) : null,
         headers: {
           Accept: 'application/json',

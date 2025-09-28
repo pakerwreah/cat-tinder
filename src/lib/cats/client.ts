@@ -28,7 +28,12 @@ export class CatsClient {
       sub_id: this.getUserId(),
       attach_image: 1,
       limit: 100,
+      order: 'DESC',
     });
+  }
+
+  async deleteFavourite(id: string): Promise<Result<void>> {
+    return this.httpClient.fetch('DELETE', `/v1/favourites/${id}`);
   }
 }
 
