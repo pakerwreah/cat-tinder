@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { View } from 'react-native';
 
 import { useFocusEffect } from 'expo-router';
@@ -14,7 +14,9 @@ import { FavouritesCell } from './FavouritesCell';
 export function FavouritesScreen() {
   const listRef = useRef<FlashListRef<Favourite>>(null);
 
-  const { data, refetch } = useFavouritesQuery();
+  const [refreshing, setRefreshing] = useState(false);
+
+  const { data, refetch, isFetching } = useFavouritesQuery();
 
   useFocusEffect(
     useCallback(() => {
@@ -25,6 +27,14 @@ export function FavouritesScreen() {
       });
     }, [refetch]),
   );
+
+  const onPullToRefresh = useCallback(async () => {
+    if (!isFetching) {
+      setRefreshing(true);
+      await refetch();
+      setRefreshing(false);
+    }
+  }, [isFetching, refetch]);
 
   const onRemove = useCallback(
     async (id: number) => {
@@ -48,6 +58,8 @@ export function FavouritesScreen() {
         contentContainerClassName="m-1 pb-32"
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <FavouritesCell item={item} onRemove={onRemove} />}
+        refreshing={refreshing}
+        onRefresh={onPullToRefresh}
       />
     </View>
   );
