@@ -8,7 +8,7 @@ import type { Favourite } from '@/lib/cats/types';
 
 type Props = {
   item: Favourite;
-  onRemove(id: string): void;
+  onRemove(id: number): void;
 };
 
 export function FavouritesCell({ item, onRemove }: Props) {

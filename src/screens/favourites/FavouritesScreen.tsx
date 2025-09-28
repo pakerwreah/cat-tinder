@@ -5,7 +5,7 @@ import { useFocusEffect } from 'expo-router';
 
 import { FlashList, type FlashListRef } from '@shopify/flash-list';
 
-import { catsClient } from '@/lib/cats/client';
+import { catsClient } from '@/lib/cats';
 import { setFavouritesQueryData, useFavouritesQuery } from '@/lib/cats/query/favourites';
 import { type Favourite } from '@/lib/cats/types';
 
@@ -27,7 +27,7 @@ export function FavouritesScreen() {
   );
 
   const onRemove = useCallback(
-    async (id: string) => {
+    async (id: number) => {
       if (data) {
         setFavouritesQueryData(data.filter((item) => item.id !== id));
       }
@@ -46,7 +46,7 @@ export function FavouritesScreen() {
         data={data}
         numColumns={2}
         contentContainerClassName="m-1 pb-32"
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <FavouritesCell item={item} onRemove={onRemove} />}
       />
     </View>

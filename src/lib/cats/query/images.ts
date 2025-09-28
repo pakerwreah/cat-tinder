@@ -1,6 +1,6 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 
-import { catsClient } from '@/lib/cats/client';
+import { catsClient } from '@/lib/cats';
 
 export function getCatImagesQueryKey() {
   return ['cat-images'] as const;

@@ -1,6 +1,6 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 
-import { catsClient } from '@/lib/cats/client';
+import { catsClient } from '@/lib/cats';
 import { type Favourite } from '@/lib/cats/types';
 import { queryClient } from '@/lib/query/client';
 

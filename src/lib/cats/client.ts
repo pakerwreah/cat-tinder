@@ -1,7 +1,5 @@
-import { CAT_API_KEY, CAT_API_URL } from '@/env';
 import { type CatImage, type Favourite } from '@/lib/cats/types';
-import { BasicHttpClient, type HttpClient, type Result } from '@/lib/http/client';
-import { useUserStore } from '@/lib/user/store';
+import { type HttpClient, type Result } from '@/lib/http/client';
 
 export class CatsClient {
   private httpClient: HttpClient;
@@ -16,7 +14,7 @@ export class CatsClient {
     return this.httpClient.fetch('GET', '/v1/images/search', { has_breeds: 1, limit: 10 });
   }
 
-  async addFavourite(imageId: string): Promise<Result<{ id: string }>> {
+  async addFavourite(imageId: string): Promise<Result<{ id: number }>> {
     return this.httpClient.fetch('POST', '/v1/favourites', {
       image_id: imageId,
       sub_id: this.getUserId(),
@@ -32,13 +30,7 @@ export class CatsClient {
     });
   }
 
-  async deleteFavourite(id: string): Promise<Result<void>> {
+  async deleteFavourite(id: number): Promise<Result<void>> {
     return this.httpClient.fetch('DELETE', `/v1/favourites/${id}`);
   }
 }
-
-const httpClient = new BasicHttpClient(CAT_API_URL, { 'x-api-key': CAT_API_KEY });
-
-const getUserId = () => useUserStore.getState().userId;
-
-export const catsClient = new CatsClient(httpClient, getUserId);

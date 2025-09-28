@@ -11,6 +11,9 @@ export type CatImage = {
 };
 
 export type Favourite = {
-  id: string;
-  image: CatImage;
+  id: number;
+  image: {
+    id: string;
+    url: string;
+  };
 };

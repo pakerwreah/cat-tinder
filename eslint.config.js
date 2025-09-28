@@ -2,6 +2,7 @@
 const { defineConfig } = require('eslint/config');
 const expoConfig = require('eslint-config-expo/flat');
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
+const testingLibrary = require('eslint-plugin-testing-library');
 
 module.exports = defineConfig([
   { ignores: ['*', '!src', '!src/**/*'] },
@@ -23,5 +24,9 @@ module.exports = defineConfig([
       '@typescript-eslint/await-thenable': 'error',
       '@typescript-eslint/consistent-type-imports': ['warn', { prefer: 'type-imports', fixStyle: 'inline-type-imports' }],
     },
+  },
+  {
+    files: ['**/?(*.)+spec.ts?(x)'],
+    ...testingLibrary.configs['flat/react'],
   },
 ]);

@@ -18,7 +18,7 @@ export class BasicHttpClient implements HttpClient {
   private baseUrl: string;
   private headers: Record<string, string>;
 
-  constructor(baseUrl: string, headers: Record<string, string>, fetchClient = { fetch }) {
+  constructor(baseUrl: string, headers: Record<string, string> = {}, fetchClient = { fetch }) {
     this.baseUrl = baseUrl;
     this.headers = headers;
     this.fetchClient = fetchClient;
