@@ -16,7 +16,7 @@ import { type CatImage } from '@/lib/cats/types';
 import { CatImageCard, type CatImageCardRef } from './CatImageCard';
 
 export type CatImageDeckRef = {
-  swipeTop: CatImageCardRef['swipe'];
+  swipeCard: CatImageCardRef['swipe'];
 };
 
 type Props = ViewProps & {
@@ -37,7 +37,7 @@ export const CatImageDeck = memo(function CatImageDeck({
   const topCardRef = useRef<CatImageCardRef>(null);
 
   useImperativeHandle(ref, () => ({
-    swipeTop(action) {
+    swipeCard(action) {
       topCardRef.current?.swipe(action);
     },
   }));

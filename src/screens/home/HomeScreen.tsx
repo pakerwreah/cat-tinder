@@ -5,6 +5,7 @@ import HeartIcon from '@/assets/icons/heart.svg';
 import XIcon from '@/assets/icons/x.svg';
 import { catsClient } from '@/lib/cats';
 import { useCatImagesQuery } from '@/lib/cats/query/images';
+import { useThrottledCallback } from '@/utils/useThrottledCallback';
 
 import { CatImageDeck, type CatImageDeckRef } from './CatImageDeck';
 import { SwipeButton } from './SwipeButton';
@@ -12,8 +13,13 @@ import { SwipeButton } from './SwipeButton';
 export function HomeScreen() {
   const deckRef = useRef<CatImageDeckRef>(null);
 
-  const swipeLeft = useCallback(() => deckRef.current?.swipeTop('left'), []);
-  const swipeRight = useCallback(() => deckRef.current?.swipeTop('right'), []);
+  const swipeLeft = useThrottledCallback(() => {
+    deckRef.current?.swipeCard('left');
+  }, 500);
+
+  const swipeRight = useThrottledCallback(() => {
+    deckRef.current?.swipeCard('right');
+  }, 500);
 
   const { isFetching, isError, data, refetch: refetchQuery } = useCatImagesQuery();
 
