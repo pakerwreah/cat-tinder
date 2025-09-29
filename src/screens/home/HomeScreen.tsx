@@ -3,10 +3,10 @@ import { ActivityIndicator, Button, View } from 'react-native';
 
 import HeartIcon from '@/assets/icons/heart.svg';
 import XIcon from '@/assets/icons/x.svg';
-import { CatImageDeck, type CatImageDeckRef } from '@/components/CatImageDeck';
 import { catsClient } from '@/lib/cats';
 import { useCatImagesQuery } from '@/lib/cats/query/images';
 
+import { CatImageDeck, type CatImageDeckRef } from './CatImageDeck';
 import { SwipeButton } from './SwipeButton';
 
 export function HomeScreen() {

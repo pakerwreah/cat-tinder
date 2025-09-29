@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { Pressable, View } from 'react-native';
 
 import { Image } from 'expo-image';
@@ -11,7 +11,7 @@ type Props = {
   onRemove(id: number): void;
 };
 
-export function FavouritesCell({ item, onRemove }: Props) {
+export const FavouritesCell = memo(function FavouritesCell({ item, onRemove }: Props) {
   const removeTap = useCallback(() => onRemove(item.id), [item.id, onRemove]);
 
   return (
@@ -25,4 +25,4 @@ export function FavouritesCell({ item, onRemove }: Props) {
       </Pressable>
     </View>
   );
-}
+});

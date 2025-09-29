@@ -1,4 +1,4 @@
-import { type Ref, useCallback, useImperativeHandle } from 'react';
+import { type Ref, memo, useCallback, useImperativeHandle } from 'react';
 import { Text, View, type ViewProps } from 'react-native';
 import { Dimensions } from 'react-native';
 
@@ -28,7 +28,7 @@ type Props = ViewProps & {
   onSwipe(id: string, action: 'left' | 'right'): void;
 };
 
-export function CatImageCard({ ref, image, onSwipe, ...props }: Props) {
+export const CatImageCard = memo(function CatImageCard({ ref, image, onSwipe, ...props }: Props) {
   const translateX = useSharedValue(0);
 
   useImperativeHandle(ref, () => ({
@@ -118,4 +118,4 @@ export function CatImageCard({ ref, image, onSwipe, ...props }: Props) {
       </Animated.View>
     </GestureDetector>
   );
-}
+});

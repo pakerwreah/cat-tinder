@@ -1,10 +1,19 @@
-import { type Ref, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import {
+  type Ref,
+  memo,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import { View, type ViewProps } from 'react-native';
 
 import { twMerge } from 'tailwind-merge';
 
-import { CatImageCard, type CatImageCardRef } from '@/components/CatImageCard';
 import { type CatImage } from '@/lib/cats/types';
+
+import { CatImageCard, type CatImageCardRef } from './CatImageCard';
 
 export type CatImageDeckRef = {
   swipeTop: CatImageCardRef['swipe'];
@@ -17,7 +26,14 @@ type Props = ViewProps & {
   onSwipe(id: string, action: 'left' | 'right'): void;
 };
 
-export function CatImageDeck({ ref, className, images, fetchMore, onSwipe, ...props }: Props) {
+export const CatImageDeck = memo(function CatImageDeck({
+  ref,
+  className,
+  images,
+  fetchMore,
+  onSwipe,
+  ...props
+}: Props) {
   const topCardRef = useRef<CatImageCardRef>(null);
 
   useImperativeHandle(ref, () => ({
@@ -56,4 +72,4 @@ export function CatImageDeck({ ref, className, images, fetchMore, onSwipe, ...pr
       ))}
     </View>
   );
-}
+});

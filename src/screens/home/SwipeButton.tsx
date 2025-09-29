@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import { Pressable, type PressableProps } from 'react-native';
 
 import { twMerge } from 'tailwind-merge';
 
-export function SwipeButton({ className, ...props }: PressableProps) {
+export const SwipeButton = memo(function SwipeButton({ className, ...props }: PressableProps) {
   return (
     <Pressable
       className={twMerge(
@@ -12,4 +13,4 @@ export function SwipeButton({ className, ...props }: PressableProps) {
       {...props}
     />
   );
-}
+});
