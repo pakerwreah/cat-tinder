@@ -1,5 +1,3 @@
-import { randomUUID } from 'expo-crypto';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
@@ -12,16 +10,24 @@ type UserState = {
 
 type UserActions = {
   update: StoreApi<UserState>['setState'];
+  reset(): void;
 };
+
+const initialState = (): Omit<UserState, '_hydrated'> => ({
+  userId: '',
+});
 
 type UserStore = UserState & UserActions;
 
 export const useUserStore = create<UserStore>()(
   persist(
     (set): UserStore => ({
-      userId: '',
+      ...initialState(),
       _hydrated: false,
       update: set,
+      reset() {
+        set(initialState);
+      },
     }),
     {
       name: 'user-storage',
@@ -31,8 +37,7 @@ export const useUserStore = create<UserStore>()(
           console.error('Hydration error', error);
           return;
         }
-        const userId = state.userId || randomUUID();
-        state.update({ userId, _hydrated: true });
+        state.update({ _hydrated: true });
       },
     },
   ),

@@ -1,7 +1,7 @@
 module.exports = {
   plugins: [
-    'prettier-plugin-tailwindcss',
-    '@trivago/prettier-plugin-sort-imports'
+    '@trivago/prettier-plugin-sort-imports',
+    'prettier-plugin-tailwindcss', // must be the last one
   ],
   importOrder: ["^react(-native)?$", "^expo-", "<THIRD_PARTY_MODULES>", "^@/", "^[./]"],
   importOrderSeparation: true,

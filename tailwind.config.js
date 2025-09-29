@@ -10,9 +10,15 @@ export default {
       fontFamily: {
         normal: ['NunitoSans_400Regular'],
         medium: ['NunitoSans_500Medium'],
+        semibold: ['NunitoSans_600SemiBold'],
         bold: ['NunitoSans_700Bold'],
+        extrabold: ['NunitoSans_800ExtraBold'],
+        black: ['NunitoSans_900Black'],
       },
       colors: {
+        primary: {
+          DEFAULT: '#EC537E'
+        },
         gray: {
           dark: '#BFBFC0'
         }

@@ -6,7 +6,10 @@ import * as SplashScreen from 'expo-splash-screen';
 import {
   NunitoSans_400Regular,
   NunitoSans_500Medium,
+  NunitoSans_600SemiBold,
   NunitoSans_700Bold,
+  NunitoSans_800ExtraBold,
+  NunitoSans_900Black,
   useFonts,
 } from '@expo-google-fonts/nunito-sans';
 
@@ -26,7 +29,10 @@ export function SplashManager({ children }: { children: ReactNode }) {
   const [fontsLoaded] = useFonts({
     NunitoSans_400Regular,
     NunitoSans_500Medium,
+    NunitoSans_600SemiBold,
     NunitoSans_700Bold,
+    NunitoSans_800ExtraBold,
+    NunitoSans_900Black,
   });
 
   const userHydrated = useUserStore((store) => store._hydrated);

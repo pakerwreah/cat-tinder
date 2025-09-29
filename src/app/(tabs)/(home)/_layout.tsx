@@ -19,7 +19,7 @@ export default function TabLayout() {
   return (
     <Tabs className="gap-2 mt-safe">
       <TabList className="mt-2 self-center rounded-full bg-gray-300 p-0.5 shadow-drop">
-        <TabTrigger name="index" href="/" asChild>
+        <TabTrigger name="home" href="/home" asChild>
           <TabButton Icon={FlameIcon} color="#EC537E" />
         </TabTrigger>
         <TabTrigger name="favourites" href="/favourites" asChild>

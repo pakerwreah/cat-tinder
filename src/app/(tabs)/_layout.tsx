@@ -14,7 +14,7 @@ export default function TabLayout() {
     <Tabs>
       <TabSlot />
       <TabList className="absolute bottom-8 self-center rounded-full bg-white px-3 shadow-drop">
-        <TabTrigger name="home" href="/" asChild>
+        <TabTrigger name="(home)" href="/home" asChild>
           <TabButton Icon={PawIcon} />
         </TabTrigger>
         <TabTrigger name="chat" href="/chat" asChild>

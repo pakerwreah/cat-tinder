@@ -43,10 +43,10 @@ export function HomeScreen() {
       </View>
       <View className="flex-1 flex-row items-center gap-12">
         <SwipeButton onPress={swipeLeft}>
-          <XIcon className="size-full color-[#E16359]" />
+          <XIcon className="size-10 color-[#E16359]" />
         </SwipeButton>
         <SwipeButton onPress={swipeRight}>
-          <HeartIcon className="size-full color-[#6BD88E]" />
+          <HeartIcon className="size-8 color-[#6BD88E]" />
         </SwipeButton>
       </View>
     </View>
