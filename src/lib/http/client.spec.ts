@@ -87,13 +87,13 @@ describe('BasicHttpClient', () => {
   it('Response error should return error', async () => {
     fetch.mockResolvedValue({
       ok: false,
-      status: 404,
-      statusText: 'Not Found',
+      status: 400,
+      text: async () => 'DUPLICATE_FAVOURITE',
     });
 
     const [error, result] = await httpClient.fetch('GET', '/path');
 
-    expect(error?.message).toBe('404 - Not Found');
+    expect(error?.message).toBe('400 - DUPLICATE_FAVOURITE');
     expect(result).toBeNull();
   });
 });

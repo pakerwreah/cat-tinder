@@ -58,7 +58,7 @@ export class BasicHttpClient implements HttpClient {
         },
       });
       if (!response.ok) {
-        throw new Error(`${response.status} - ${response.statusText}`);
+        throw new Error(`${response.status} - ${await response.text()}`);
       }
       const result = await response.json();
       return [null, result];
