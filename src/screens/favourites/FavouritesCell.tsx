@@ -16,7 +16,7 @@ export const FavouritesCell = memo(function FavouritesCell({ item, onRemove }: P
 
   return (
     <View className="my-0.5 aspect-square flex-1 overflow-hidden rounded-lg">
-      <Image className="size-full" source={item.image.url} />
+      <Image className="size-full" source={item.image.url} recyclingKey={item.id.toString()} />
       <Pressable
         className="absolute right-2 top-2 size-6 rounded-full bg-white/75 p-0.5 active:opacity-50"
         onPress={removeTap}
