@@ -3,8 +3,6 @@ import { Image, Pressable, Text, TextInput, View } from 'react-native';
 
 import { randomUUID } from 'expo-crypto';
 
-import { twMerge } from 'tailwind-merge';
-
 import Logo from '@/assets/images/logo.png';
 import { FormScrollView } from '@/components/FormScrollView';
 import { useUserStore } from '@/lib/user/store';
@@ -52,7 +50,7 @@ export function LoginScreen() {
           />
 
           <Pressable
-            className={twMerge('rounded-lg bg-primary p-2 active:opacity-50 disabled:opacity-50')}
+            className="rounded-lg bg-primary p-2 active:opacity-50 disabled:opacity-50"
             disabled={!canSubmit}
             onPress={submit}
           >
