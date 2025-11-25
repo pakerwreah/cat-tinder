@@ -8,13 +8,16 @@ import { twMerge } from 'tailwind-merge';
 
 import FlameIcon from '@/assets/icons/flame.svg';
 import StarIcon from '@/assets/icons/star.svg';
+import { useCatsClient } from '@/lib/cats';
 import { getFavouritesQuery } from '@/lib/cats/query/favourites';
 import { queryClient } from '@/lib/query/client';
 
 export default function TabLayout() {
+  const catsClient = useCatsClient();
+
   useEffect(() => {
-    void queryClient.prefetchQuery(getFavouritesQuery());
-  }, []);
+    void queryClient.prefetchQuery(getFavouritesQuery(catsClient));
+  }, [catsClient]);
 
   return (
     <Tabs className="gap-2 mt-safe">

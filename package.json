@@ -14,7 +14,10 @@
     "preset": "jest-expo",
     "setupFilesAfterEnv": [
       "./src/jest.setup.ts"
-    ]
+    ],
+    "moduleNameMapper": {
+      ".svg": "<rootDir>/svg-mock.js"
+    }
   },
   "expo": {
     "install": {

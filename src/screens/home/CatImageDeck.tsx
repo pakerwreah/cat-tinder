@@ -64,6 +64,7 @@ export const CatImageDeck = memo(function CatImageDeck({
       {filtered.map((image, i, { length }) => (
         <CatImageCard
           ref={i === length - 1 ? topCardRef : undefined}
+          isTop={i === length - 1}
           className={twMerge('absolute inset-4', i < length - 2 && 'invisible')}
           key={image.id}
           image={image}

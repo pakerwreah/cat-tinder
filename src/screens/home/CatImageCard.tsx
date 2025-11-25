@@ -8,6 +8,7 @@ import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, {
   runOnJS,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
   withSpring,
   withTiming,
@@ -24,11 +25,18 @@ export type CatImageCardRef = {
 
 type Props = ViewProps & {
   ref?: Ref<CatImageCardRef>;
+  isTop: boolean;
   image: CatImage;
   onSwipe(id: string, action: 'left' | 'right'): void;
 };
 
-export const CatImageCard = memo(function CatImageCard({ ref, image, onSwipe, ...props }: Props) {
+export const CatImageCard = memo(function CatImageCard({
+  ref,
+  isTop,
+  image,
+  onSwipe,
+  ...props
+}: Props) {
   const translateX = useSharedValue(0);
 
   useImperativeHandle(ref, () => ({
@@ -44,6 +52,8 @@ export const CatImageCard = memo(function CatImageCard({ ref, image, onSwipe, ..
   }));
 
   const gesture = Gesture.Pan()
+    .withTestId(isTop ? 'pan-gesture' : '')
+    .enabled(isTop)
     .onUpdate((e) => {
       translateX.value = e.translationX;
     })
@@ -85,9 +95,18 @@ export const CatImageCard = memo(function CatImageCard({ ref, image, onSwipe, ..
 
   const breed = image.breeds.at(0);
 
+  const cardState = useDerivedValue((): string | undefined =>
+    translateX.value === 0 ? 'swipeable' : 'swiped',
+  );
+
   return (
     <GestureDetector gesture={gesture}>
-      <Animated.View {...props} style={animatedCardStyle}>
+      <Animated.View
+        {...props}
+        style={animatedCardStyle}
+        testID="cat-image-card"
+        aria-valuetext={cardState}
+      >
         <Image className="size-full overflow-hidden rounded-2xl bg-gray-200" source={image.url} />
 
         <Animated.View

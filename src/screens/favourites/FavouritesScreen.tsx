@@ -5,7 +5,7 @@ import { useFocusEffect } from 'expo-router';
 
 import { FlashList, type FlashListRef } from '@shopify/flash-list';
 
-import { catsClient } from '@/lib/cats';
+import { useCatsClient } from '@/lib/cats';
 import { setFavouritesQueryData, useFavouritesQuery } from '@/lib/cats/query/favourites';
 import { type Favourite } from '@/lib/cats/types';
 
@@ -13,6 +13,8 @@ import { FavouritesCell } from './FavouritesCell';
 
 export function FavouritesScreen() {
   const listRef = useRef<FlashListRef<Favourite>>(null);
+
+  const catsClient = useCatsClient();
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -46,7 +48,7 @@ export function FavouritesScreen() {
         console.error(error);
       }
     },
-    [data],
+    [catsClient, data],
   );
 
   return (

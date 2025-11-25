@@ -1,6 +1,6 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 
-import { catsClient } from '@/lib/cats';
+import { type CatsClient, useCatsClient } from '@/lib/cats';
 import { type Favourite } from '@/lib/cats/types';
 import { queryClient } from '@/lib/query/client';
 
@@ -8,7 +8,7 @@ export function getFavouritesQueryKey() {
   return ['favourites'] as const;
 }
 
-export function getFavouritesQuery() {
+export function getFavouritesQuery(catsClient: CatsClient) {
   return queryOptions({
     queryKey: getFavouritesQueryKey(),
     queryFn: async () => {
@@ -23,7 +23,7 @@ export function getFavouritesQuery() {
 }
 
 export function useFavouritesQuery() {
-  return useQuery(getFavouritesQuery());
+  return useQuery(getFavouritesQuery(useCatsClient()));
 }
 
 export function setFavouritesQueryData(data: Favourite[]) {

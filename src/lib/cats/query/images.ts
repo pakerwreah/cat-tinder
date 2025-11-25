@@ -1,12 +1,12 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 
-import { catsClient } from '@/lib/cats';
+import { type CatsClient, useCatsClient } from '@/lib/cats';
 
 export function getCatImagesQueryKey() {
   return ['cat-images'] as const;
 }
 
-export function getCatImagesQuery() {
+export function getCatImagesQuery(catsClient: CatsClient) {
   return queryOptions({
     queryKey: getCatImagesQueryKey(),
     queryFn: async () => {
@@ -21,5 +21,5 @@ export function getCatImagesQuery() {
 }
 
 export function useCatImagesQuery() {
-  return useQuery(getCatImagesQuery());
+  return useQuery(getCatImagesQuery(useCatsClient()));
 }

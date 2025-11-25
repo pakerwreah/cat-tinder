@@ -3,7 +3,7 @@ import { ActivityIndicator, Button, View } from 'react-native';
 
 import HeartIcon from '@/assets/icons/heart.svg';
 import XIcon from '@/assets/icons/x.svg';
-import { catsClient } from '@/lib/cats';
+import { useCatsClient } from '@/lib/cats';
 import { useCatImagesQuery } from '@/lib/cats/query/images';
 import { useThrottledCallback } from '@/utils/useThrottledCallback';
 
@@ -12,6 +12,8 @@ import { SwipeButton } from './SwipeButton';
 
 export function HomeScreen() {
   const deckRef = useRef<CatImageDeckRef>(null);
+
+  const catsClient = useCatsClient();
 
   const swipeLeft = useThrottledCallback(() => {
     deckRef.current?.swipeCard('left');
@@ -25,16 +27,21 @@ export function HomeScreen() {
 
   const refetch = useCallback(() => refetchQuery(), [refetchQuery]);
 
-  const onSwipe = useCallback(async (imageId: string, action: 'left' | 'right') => {
-    if (action === 'left') {
-      return;
-    }
-    const [error] = await catsClient.addFavourite(imageId);
+  const onSwipe = useCallback(
+    async (imageId: string, action: 'left' | 'right') => {
+      if (action === 'left') {
+        return;
+      }
+      const [error] = await catsClient.addFavourite(imageId);
 
-    if (error) {
-      console.error(error);
-    }
-  }, []);
+      if (error) {
+        console.error(error);
+      }
+    },
+    [catsClient],
+  );
+
+  const disabled = isFetching || isError;
 
   return (
     <View className="flex-1 items-center py-8 mb-safe">
@@ -48,10 +55,10 @@ export function HomeScreen() {
         )}
       </View>
       <View className="flex-1 flex-row items-center gap-12">
-        <SwipeButton onPress={swipeLeft}>
+        <SwipeButton testID="dislike-btn" onPress={swipeLeft} disabled={disabled}>
           <XIcon className="size-10 color-[#E16359]" />
         </SwipeButton>
-        <SwipeButton onPress={swipeRight}>
+        <SwipeButton testID="like-btn" onPress={swipeRight} disabled={disabled}>
           <HeartIcon className="size-8 color-[#6BD88E]" />
         </SwipeButton>
       </View>
